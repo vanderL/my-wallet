@@ -1,14 +1,13 @@
 import React from 'react';
-import { Dashboard } from './pages/Dashboard';
-import { List } from './pages/List';
-import { SingIn } from './pages/SignIn';
+import GlobalStyles from './styles/GlobalStyles';
+import { Layout } from './components/Layout';
 
-function App() {
+
+const App: React.FC = () => {
   return (
     <>
-    <Dashboard />
-    <List />
-    <SingIn />
+      <GlobalStyles />
+      <Layout />
     </>
   );
 }
