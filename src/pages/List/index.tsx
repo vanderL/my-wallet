@@ -18,12 +18,12 @@ export const List: React.FC = () => {
 
             <Content>
                 <HistoryFinanceCard 
-                    cardColor={"#313862"}
                     tagColor={"#e44c4e"}
                     title={"Conta de Luz"}
                     subtitle={"27/07/2021"}
                     amount={"R$ 130,00"}
                 />
+                
             </Content>
         </Container>
     )
