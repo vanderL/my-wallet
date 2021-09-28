@@ -1,20 +1,42 @@
 import { ContentHeader } from "../../components/ContentHeader"
 import { SelectInput } from "../../components/SelectInput"
 import { HistoryFinanceCard } from "../../components/HistoryFinanceCard"
-import { Container, Content } from "./styles"
+import { Container, Content, Filters } from "./styles"
 
 export const List: React.FC = () => {
-    const options = [
-        {value: 'Vander', label: 'Vander'},
-        {value: 'Jose', label: 'Jose'},
-        {value: 'Maria', label: 'Maria'},
+    const months = [
+        {value: 7, label: 'Julho'},
+        {value: 8, label: 'Agosto'},
+        {value: 9, label: 'Setembro'},
+    ]
+    const years = [
+        {value: 2021, label: '2021'},
+        {value: 2020, label: '2020'},
+        {value: 2019, label: '2019'}
     ]
 
     return (
         <Container>
             <ContentHeader title="Saidas" lineColor="#e44c4e">
-                <SelectInput options={options}/>
+                <SelectInput options={months}/>
+                <SelectInput options={years}/>
             </ContentHeader>
+
+            <Filters>
+                <button 
+                    type="button"
+                    className="tag-filter tag-filter-recurrent"
+                >
+                    Recorrentes
+                </button>
+
+                <button 
+                    type="button"
+                    className="tag-filter tag-filter-eventual"
+                >
+                    Eventuais
+                </button>
+            </Filters>
 
             <Content>
                 <HistoryFinanceCard 
