@@ -1,6 +1,7 @@
 import { ContentHeader } from "../../components/ContentHeader"
 import { SelectInput } from "../../components/SelectInput"
-import { Container } from "./styles"
+import { HistoryFinanceCard } from "../../components/HistoryFinanceCard"
+import { Container, Content } from "./styles"
 
 export const List: React.FC = () => {
     const options = [
@@ -14,6 +15,16 @@ export const List: React.FC = () => {
             <ContentHeader title="Saidas" lineColor="#e44c4e">
                 <SelectInput options={options}/>
             </ContentHeader>
+
+            <Content>
+                <HistoryFinanceCard 
+                    cardColor={"#313862"}
+                    tagColor={"#e44c4e"}
+                    title={"Conta de Luz"}
+                    subtitle={"27/07/2021"}
+                    amount={"R$ 130,00"}
+                />
+            </Content>
         </Container>
     )
 }
