@@ -26,22 +26,22 @@ export const Aside: React.FC = () => {
             </Header>
 
             <MenuContainer>
-                <MenuItemLink href="#">
+                <MenuItemLink href="/dashboard">
                     <MdDashboard />
                     Dashboard
                 </MenuItemLink>
 
-                <MenuItemLink href="#">
+                <MenuItemLink href="/list/income">
                     <MdArrowDownward />
                     Entradas
                 </MenuItemLink>
 
-                <MenuItemLink href="#">
+                <MenuItemLink href="/list/outcome">
                     <MdArrowUpward />
                     Saidas
                 </MenuItemLink>
 
-                <MenuItemLink href="#">
+                <MenuItemLink href="/exit">
                     <MdExitToApp />
                     Sair
                 </MenuItemLink>
