@@ -26,8 +26,9 @@ export const Filters = styled.div`
         transition: opacity 0.5s;
 
         &:hover {
-            opacity: .6;
+            opacity: .7;
         }
+        opacity: 0.4;
     }
 
     .tag-filter-recurrent::after {
@@ -35,7 +36,7 @@ export const Filters = styled.div`
         display: block;
         width: 55px;
         margin: 0 auto;
-        border-bottom: 10px solid ${props => props.theme.color.warning};
+        border-bottom: 10px solid ${props => props.theme.color.success};
     }
 
     .tag-filter-eventual::after {
@@ -43,7 +44,11 @@ export const Filters = styled.div`
         display: block;
         width: 55px;
         margin: 0 auto;
-        border-bottom: 10px solid ${props => props.theme.color.success};
+        border-bottom: 10px solid ${props => props.theme.color.warning};
+    }
+
+    .tag-actived {
+        opacity: 1;
     }
 `;
 
