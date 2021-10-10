@@ -4,10 +4,14 @@ import { ContentHeader } from '../../components/ContentHeader';
 import { SelectInput } from "../../components/SelectInput";
 
 import {WalletBox} from '../../components/WalletBox';
+import {MessageBox} from '../../components/MessageBox';
 
 import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
 import listOfMonths from '../../utils/months';
+
+import flatImg from '../../assets/flat.svg';
+import loudlyCryingFaceImg from '../../assets/loudlyCryingFace.svg';
 
 export const Dashboard: React.FC = () => {
     const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth() + 1);
@@ -98,6 +102,12 @@ export const Dashboard: React.FC = () => {
                     footerLabel={'Atualizado com base nas entradas e saídas'}
                     color={'#e44c4e'}
                     icon={'arrowDown'}
+                />
+                <MessageBox 
+                    title={'Que bad!'}
+                    description={'Sua carteira está negativa!'}
+                    footerText={'Continue assim. Ei, investi ai mano'}
+                    icon={loudlyCryingFaceImg}
                 />
             </Content>
         </Container>
