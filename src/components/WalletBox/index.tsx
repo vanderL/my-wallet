@@ -48,7 +48,7 @@ export const WalletBox: React.FC<IWalletBoxProps> = ({
                     decimal=","
                     decimals={2}
                     preserveValue={true}
-                    duration={5.00}
+                    duration={2.00}
                 />
             </h1>
             <small>{footerLabel}</small>

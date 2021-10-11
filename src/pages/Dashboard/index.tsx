@@ -12,11 +12,13 @@ import listOfMonths from '../../utils/months';
 
 import flatImg from '../../assets/flat.svg';
 import loudlyCryingFaceImg from '../../assets/loudlyCryingFace.svg';
+import grinningImg from '../../assets/grinning.svg';
 
 export const Dashboard: React.FC = () => {
     const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth() + 1);
     const [yearSelected, setYearSelected] = useState<number>(new Date().getFullYear());
     
+
     const months = useMemo(() => {
         return listOfMonths.map((month, index) => {
             return {
@@ -47,6 +49,76 @@ export const Dashboard: React.FC = () => {
             }
         });
     },[])
+
+
+    const totalExpenses = useMemo(() => {
+        let total: number = 0;
+
+        expenses.forEach(item =>{
+            const date = new Date(item.date);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+
+            if(month === monthSelected && year === yearSelected) {
+                try {
+                    total += Number(item.amount);
+                } catch {
+                    throw new Error('Invalid amount! Amount must be number.');
+                }
+            }
+        })
+
+        return total;
+    },[monthSelected, yearSelected]);
+
+    const totalGains = useMemo(() => {
+        let total: number = 0;
+
+        gains.forEach(item =>{
+            const date = new Date(item.date);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+
+            if(month === monthSelected && year === yearSelected) {
+                try {
+                    total += Number(item.amount);
+                } catch {
+                    throw new Error('Invalid amount! Amount must be number.');
+                }
+            }
+        })
+
+        return total;
+    },[monthSelected, yearSelected]);
+
+    const totalBalance = useMemo(() => {
+        return totalGains - totalExpenses;
+    },[totalExpenses, totalGains]);
+
+    const message = useMemo(() => {
+        if(totalBalance < 0){
+            return {
+                title: "Que bad!",
+                    description: "Neste mês, você gastou mais do que deveria.",
+                    footerText: "Verifique seus gastos e tente cortar algumas coisas desnecessárias",
+                    icon: loudlyCryingFaceImg    
+            }
+        } else if(totalBalance === 0){
+            return {
+                title: "Quase quase",
+                description: "Neste mês, você gastou exatamente oque ganhou",
+                footerText: "Tenha cuidado. Faça um plano financeiro urgente, comece com metas curtas",
+                icon: grinningImg    
+            }
+        } else {
+            return {
+                title: "Muito bem!",
+                description: "Sua carteira está positiva",
+                footerText: "Continue assim. Considere investir o seu saldo",
+                icon: flatImg    
+            } 
+        }
+    },[totalBalance]);
 
     const handleMonthSelected = (month: string) => {
         try {
@@ -84,30 +156,30 @@ export const Dashboard: React.FC = () => {
             <Content>
                 <WalletBox 
                     title={'Saldo'}
-                    amount={150.00}
+                    amount={totalBalance}
                     footerLabel={'Atualizado com base nas entradas e saídas'}
                     color={'#4e41f0'}
                     icon={'cifrao'}
                 />
                 <WalletBox 
                     title={'Entradas'}
-                    amount={5000.00}
+                    amount={totalGains}
                     footerLabel={'Atualizado com base nas entradas e saídas'}
                     color={'#f7931b'}
                     icon={'arrowUp'}
                 />
                 <WalletBox 
                     title={'Saidas'}
-                    amount={4850.00}
+                    amount={totalExpenses}
                     footerLabel={'Atualizado com base nas entradas e saídas'}
                     color={'#e44c4e'}
                     icon={'arrowDown'}
                 />
                 <MessageBox 
-                    title={'Que bad!'}
-                    description={'Sua carteira está negativa!'}
-                    footerText={'Continue assim. Ei, investi ai mano'}
-                    icon={loudlyCryingFaceImg}
+                    title={message.title}
+                    description={message.description}
+                    footerText={message.footerText}
+                    icon={message.icon}
                 />
             </Content>
         </Container>
