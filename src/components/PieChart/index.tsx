@@ -2,33 +2,46 @@ import { Container, Legend, LegendContainer, SideLeft, SideRight } from "./style
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
-export const PieChartComponent: React.FC = () => (
+interface IPieChartComponentProps {
+    data: {
+        name: string;
+        value: number;
+        percent: number;
+        color: string; 
+    }[]
+}
+
+export const PieChartComponent: React.FC<IPieChartComponentProps> = ({data}) => (
     <Container>
         <SideLeft>
             <h2>Relação</h2>
             <LegendContainer>
-                <Legend color="#f7931b">
-                    <div>5%</div>
-                    <span>Entradas</span>
-                </Legend>
-                <Legend color="#e44c4e">
-                    <div>95%</div>
-                    <span>Saídas</span>
-                </Legend>
-                
+                {
+                    data?.map(indicator => (
+                        <Legend key={indicator.percent} color={indicator.color}>
+                            <div>{indicator.percent}%</div>
+                            <span>{indicator.name}</span>
+                        </Legend>
+                    ))
+                }
             </LegendContainer>
         </SideLeft>
 
         <SideRight>
-            {/* <ResponsiveContainer>
+            <ResponsiveContainer>
                 <PieChart>
                     <Pie 
-                        data={[]}
-                        labelLine={false}
+                        data={data}
                         dataKey="percent"
-                    />
+                    >
+                        {
+                            data.map(indicator => (
+                                <Cell key={indicator.name} fill={indicator.color} />
+                            ))
+                        }
+                    </Pie>
                 </PieChart>
-            </ResponsiveContainer> */}
+            </ResponsiveContainer>
         </SideRight>
     </Container>
 );
