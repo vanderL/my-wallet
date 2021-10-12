@@ -1,24 +1,25 @@
 import { useMemo, useState } from "react";
-import { Container, Content } from "./styles"
+
 import { ContentHeader } from '../../components/ContentHeader';
 import { SelectInput } from "../../components/SelectInput";
-
 import {WalletBox} from '../../components/WalletBox';
 import {MessageBox} from '../../components/MessageBox';
+import {PieChartComponent} from '../../components/PieChart';
 
 import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
-import listOfMonths from '../../utils/months';
 
 import flatImg from '../../assets/flat.svg';
 import loudlyCryingFaceImg from '../../assets/loudlyCryingFace.svg';
 import grinningImg from '../../assets/grinning.svg';
 
+import listOfMonths from '../../utils/months';
+import { Container, Content } from "./styles"
+
 export const Dashboard: React.FC = () => {
     const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth() + 1);
     const [yearSelected, setYearSelected] = useState<number>(new Date().getFullYear());
     
-
     const months = useMemo(() => {
         return listOfMonths.map((month, index) => {
             return {
@@ -49,7 +50,6 @@ export const Dashboard: React.FC = () => {
             }
         });
     },[])
-
 
     const totalExpenses = useMemo(() => {
         let total: number = 0;
@@ -181,6 +181,8 @@ export const Dashboard: React.FC = () => {
                     footerText={message.footerText}
                     icon={message.icon}
                 />
+
+                <PieChartComponent />
             </Content>
         </Container>
     )
