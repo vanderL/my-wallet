@@ -17,8 +17,8 @@ export const PieChartComponent: React.FC<IPieChartComponentProps> = ({data}) => 
             <h2>Relação</h2>
             <LegendContainer>
                 {
-                    data?.map(indicator => (
-                        <Legend key={indicator.percent} color={indicator.color}>
+                    data.map(indicator => (
+                        <Legend key={indicator.name} color={indicator.color}>
                             <div>{indicator.percent}%</div>
                             <span>{indicator.name}</span>
                         </Legend>

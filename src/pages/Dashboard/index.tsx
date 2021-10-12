@@ -29,7 +29,7 @@ export const Dashboard: React.FC = () => {
         })
         
 
-    },[listOfMonths])
+    },[])
 
     const years = useMemo(() => {
         let uniqueYears: number[] = [];
@@ -121,22 +121,22 @@ export const Dashboard: React.FC = () => {
     },[totalBalance]);
 
     const relationExpensesVersusGains = useMemo(() => {
-        const total = totalExpenses + totalGains;
+        const total = totalGains + totalExpenses;
 
-        const gainsPercent = (totalGains / total) * 100;
-        const expensesPercent = (totalExpenses / total) * 100;
+        const gainsPercent = Number(((totalGains / total) * 100).toFixed(1));
+        const expensesPercent = Number(((totalExpenses / total) * 100).toFixed(1));
 
         const data = [
             {
                 name: "Entradas",
-                value: gainsPercent,
-                percent: Number(gainsPercent.toFixed(1)),
+                value: totalGains,
+                percent: gainsPercent ? gainsPercent : 0,
                 color: '#f7931b'
             },
             {
                 name: "Saídas",
-                value: expensesPercent,
-                percent: Number(expensesPercent.toFixed(1)),
+                value: totalExpenses,
+                percent: expensesPercent ? expensesPercent : 0,
                 color: '#e44c4e' 
             }
         ];
