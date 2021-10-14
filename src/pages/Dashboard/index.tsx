@@ -14,6 +14,7 @@ import expenses from '../../repositories/expenses';
 import flatImg from '../../assets/flat.svg';
 import loudlyCryingFaceImg from '../../assets/loudlyCryingFace.svg';
 import grinningImg from '../../assets/grinning.svg';
+import opsImg from '../../assets/ops.svg';
 
 import listOfMonths from '../../utils/months';
 import { Container, Content } from "./styles"
@@ -98,12 +99,20 @@ export const Dashboard: React.FC = () => {
     },[totalExpenses, totalGains]);
 
     const message = useMemo(() => {
+        console.log(totalGains)
         if(totalBalance < 0){
             return {
                 title: "Que bad!",
                     description: "Neste mês, você gastou mais do que deveria.",
                     footerText: "Verifique seus gastos e tente cortar algumas coisas desnecessárias",
                     icon: loudlyCryingFaceImg    
+            }
+        } else if(totalGains === 0 && totalExpenses === 0){
+            return {
+                title: "Opa Opa! ",
+                description: "Não há registros de entradas ou saídas",
+                footerText: "Parece que você não fez nenhum registro no mês selecionado",
+                icon: opsImg    
             }
         } else if(totalBalance === 0){
             return {
@@ -120,7 +129,7 @@ export const Dashboard: React.FC = () => {
                 icon: flatImg    
             } 
         }
-    },[totalBalance]);
+    },[totalBalance, totalGains, totalExpenses]);
 
     const relationExpensesVersusGains = useMemo(() => {
         const total = totalGains + totalExpenses;
@@ -217,19 +226,19 @@ export const Dashboard: React.FC = () => {
 
         const total = amountRecurrent + amountEventual;
         const percentEventual = Number(((amountEventual / total) * 100).toFixed(1));
-        const percentRecurrent = Number(((amountEventual / total) * 100).toFixed(1));
+        const percentRecurrent = Number(((amountRecurrent / total) * 100).toFixed(1));
 
         return [
             {
                 name: 'Recorrentes',
                 amount: amountRecurrent,
-                percent: percentRecurrent,
+                percent: percentRecurrent ? percentRecurrent : 0,
                 color: '#f7931b'
             },
             {
                 name: 'Eventuais',
                 amount: amountEventual,
-                percent: percentEventual,
+                percent: percentEventual ? percentEventual : 0,
                 color: '#e44c4e'
             },
         ]
@@ -257,20 +266,21 @@ export const Dashboard: React.FC = () => {
         });
 
         const total = amountRecurrent + amountEventual;
+
+        const percentRecurrent = Number(((amountRecurrent / total) * 100).toFixed(1));
         const percentEventual = Number(((amountEventual / total) * 100).toFixed(1));
-        const percentRecurrent = Number(((amountEventual / total) * 100).toFixed(1));
 
         return [
             {
                 name: 'Recorrentes',
                 amount: amountRecurrent,
-                percent: percentRecurrent,
+                percent: percentRecurrent ? percentRecurrent : 0,
                 color: '#f7931b'
             },
             {
                 name: 'Eventuais',
                 amount: amountEventual,
-                percent: percentEventual,
+                percent: percentEventual ? percentEventual : 0,
                 color: '#e44c4e'
             },
         ]
