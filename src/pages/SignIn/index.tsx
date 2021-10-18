@@ -1,3 +1,4 @@
+import { Input } from '../../components/Input';
 import { 
     Container, 
     Form, 
@@ -7,6 +8,7 @@ import {
 
 import logoImg from '../../assets/logo.svg'
 
+
 export const SingIn: React.FC = () => {
     return (
         <Container>
@@ -15,11 +17,19 @@ export const SingIn: React.FC = () => {
                 <h2>Minha Carteira</h2>
             </Logo>
 
-            <Form>
+            <Form onSubmit={() => console.log('Form submitted')}>
                 <FormTitle> Entrar </FormTitle>
 
-                <input type="text" />
-                <input type="password" />
+                <Input 
+                    type="email" 
+                    placeholder="E-mail"
+                    required={true}
+                />
+                <Input
+                    placeholder="Senha"
+                    type="password" 
+                    required={true}
+                />
 
                 <button type="submit">Acessar</button>
             </Form>
